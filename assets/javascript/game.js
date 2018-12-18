@@ -7,7 +7,6 @@ let game = {
         $.each(blocks, function (key, value) {
             game.questions.push(value);
         })
-        console.log(this.questions);
     },
 
     displayQuestion: function () {
@@ -29,7 +28,7 @@ let game = {
         }
     },
 
-    
+
 }
 
 $(document).ready(function () {
@@ -37,9 +36,5 @@ $(document).ready(function () {
     game.fillQuestions();
     game.displayQuestion();
 
-    $("ul").on("click", "li", game.answerCheck)
+    $("ul").on("click", "li", game.answerCheck);
 })
-
-
-
-
