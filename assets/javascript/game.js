@@ -20,6 +20,7 @@ let game = {
     answerCheck: function () {
         if ($(this).text() === game.curQuestion.answer) {
             //got right answer
+            
             console.log("this is the right answer");
         }
         else {
