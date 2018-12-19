@@ -39,41 +39,41 @@ let game = {
         $("#quiz-title").text(this.curQuestion.title);
         $("#quiz-answers").empty();
         for (let i = 0; i < options.length; i++) {
-            let optionButton = $(`<button>${options[i]}</button><br>`).addClass("quizButton btn btn-outline-primary")
+            let optionButton = $(`<button>${options[i]}</button><br>`).addClass("quizButton btn btn-outline-primary");
             $("#quiz-answers").append(optionButton);
         };
     },
 
     displayAnswer: function () {
-        this.questionsAnswered++;
-        //console.log(game.questionsAnswered, game.questionLimit);
-        if (this.questionsAnswered === this.questionLimit) {
-            this.playing = false;
-            $("#quiz-answers").empty();
-            $("#quiz-title").html("Thanks for playing! Try again?")
-            $("#message").html(`Quiz Over`);
-
-        }
-        else {
             setTimeout(function () {
-                game.displayQuestion();
-                $("#message").empty();
-            }, 3000)
-        }
+                game.questionsAnswered++;
+                if (game.questionsAnswered !== game.questionLimit)
+                    game.displayQuestion();
+                else
+                    game.endGame();
+            }, 3000);
     },
 
     answerCheck: function () {
         if ($(this).text() === game.curQuestion.answer) {
-            //got right answer
             game.right++;
-            $("#message").html("this is the right answer")
-
+            $("#quiz-title").html("this is the right answer")
         }
         else {
-            //got wrong answer
             game.wrong++;
-            $("#message").html("this is the wrong answer")
+            $("#quiz-title").html("this is the wrong answer")
         }
+        $("#quiz-answers").empty();
+        game.displayAnswer();
+    },
+
+    endGame: function () {
+        $("#quiz-answers").empty();
+            this.playing = false;
+            $("#quiz-answers").empty();
+            $("#quiz-title").html("Thanks for playing! Try again?");
+            let restartButton = $("<button>").text("Play Again?").addClass("quizButton btn btn-outline-secondary");
+            $("#message").append(restartButton);
     },
 }
 
@@ -82,4 +82,9 @@ $(document).ready(function () {
     game.fillQuestions();
     game.displayQuestion();
     $("#quiz-answers").on("click", "button", game.answerCheck);
+    $("#message").on("click", "button", function() {
+        $("#message").empty();
+        game.questionsAnswered = 0;
+        game.displayQuestion();
+    });
 })
