@@ -57,11 +57,11 @@ let game = {
     answerCheck: function () {
         if ($(this).text() === game.curQuestion.answer) {
             game.right++;
-            $("#quiz-title").html("this is the right answer")
+            $("#quiz-title").html("You got it right!")
         }
         else {
             game.wrong++;
-            $("#quiz-title").html("this is the wrong answer")
+            $("#quiz-title").html("Sorry that was wrong.")
         }
         $("#quiz-answers").empty();
         game.displayAnswer();
@@ -71,14 +71,13 @@ let game = {
         $("#quiz-answers").empty();
             this.playing = false;
             $("#quiz-answers").empty();
-            $("#quiz-title").html("Thanks for playing! Try again?");
+            $("#quiz-title").html(`You got ${this.right} question(s) right out of ${this.questionLimit}.`);
             let restartButton = $("<button>").text("Play Again?").addClass("quizButton btn btn-outline-secondary");
             $("#message").append(restartButton);
     },
 }
 
 $(document).ready(function () {
-
     game.fillQuestions();
     game.displayQuestion();
     $("#quiz-answers").on("click", "button", game.answerCheck);
