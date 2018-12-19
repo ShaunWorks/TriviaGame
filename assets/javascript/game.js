@@ -39,7 +39,8 @@ let game = {
         $("#quiz-title").text(this.curQuestion.title);
         $("#quiz-answers").empty();
         for (let i = 0; i < options.length; i++) {
-            $("#quiz-answers").append(`<li>${options[i]}`);
+            let optionButton = $(`<button>${options[i]}</button><br>`).addClass("quizButton btn btn-outline-primary")
+            $("#quiz-answers").append(optionButton);
         };
     },
 
@@ -80,5 +81,5 @@ $(document).ready(function () {
 
     game.fillQuestions();
     game.displayQuestion();
-    $("ul").on("click", "li", game.answerCheck);
+    $("#quiz-answers").on("click", "button", game.answerCheck);
 })
