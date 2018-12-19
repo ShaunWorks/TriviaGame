@@ -17,7 +17,7 @@ let blocks = {
     ),
     q2: new triviaBlock(
         "Which is not a water brand?",
-        "Bulbasaur",
+        "Aqua Park",
         [
             "Dasani",
             "Fiji",
