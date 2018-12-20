@@ -18,15 +18,12 @@ function shuffle(arr) {
 }
 
 let game = {
-    playing: true,
     right: 0,
-    wrong: 0,
     questionsAnswered: 0,
     questionLimit: 5,
     questionCount: 0,
     curQuestion: new triviaBlock(),
     questions: [],
-    timer: null,
 
     fillQuestions: function () {
         $.each(blocks, function (key, value) {
@@ -63,7 +60,6 @@ let game = {
             $("#quiz-title").html("You got it right!")
         }
         else {
-            game.wrong++;
             $("#quiz-title").html("Sorry that was wrong.")
         }
         $("#quiz-answers").empty();
@@ -72,7 +68,6 @@ let game = {
 
     endGame: function () {
         $("#quiz-answers").empty();
-            this.playing = false;
             $("#quiz-answers").empty();
             $("#quiz-title").html(`You got ${this.right} question(s) right out of ${this.questionLimit}.`);
             let restartButton = $("<button>").text("Play Again?").addClass("quizButton btn btn-outline-secondary");
@@ -83,7 +78,9 @@ let game = {
 $(document).ready(function () {
     game.fillQuestions();
     game.displayQuestion();
+
     $("#quiz-answers").on("click", "button", game.answerCheck);
+    
     $("#message").on("click", "button", function() {
         $("#message").empty();
         game.right = 0;
