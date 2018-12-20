@@ -25,5 +25,45 @@ let blocks = {
             "Aqua Park"
         ]
     ),
+    q3: new triviaBlock(
+        "Which is a Gen 1 Pokemon?",
+        "Jynx",
+        [
+            "Jynx",
+            "Torchic",
+            "Hoothoot",
+            "Chimchar"
+        ]
+    ),
+    q4: new triviaBlock(
+        "Which character does not appear in all Smash Bros. games?",
+        "Marth",
+        [
+            "Marth",
+            "Mario",
+            "Pikachu",
+            "Captain Falcon"
+        ]
+    ),
+    q5: new triviaBlock(
+        "Pick C?",
+        "C",
+        [
+            "A",
+            "B",
+            "C",
+            "D"
+        ]
+    ),
+    q6: new triviaBlock(
+        "Pick B?",
+        "B",
+        [
+            "A",
+            "B",
+            "C",
+            "D"
+        ]
+    ),
 
 }

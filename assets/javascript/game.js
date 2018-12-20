@@ -23,6 +23,7 @@ let game = {
     wrong: 0,
     questionsAnswered: 0,
     questionLimit: 5,
+    questionCount: 0,
     curQuestion: new triviaBlock(),
     questions: [],
     timer: null,
@@ -31,10 +32,11 @@ let game = {
         $.each(blocks, function (key, value) {
             game.questions.push(value);
         })
+        game.questions = shuffle(game.questions);
     },
 
     displayQuestion: function () {
-        this.curQuestion = this.questions[Math.floor(Math.random() * this.questions.length)];
+        this.curQuestion = this.questions[this.questionCount];
         let options = shuffle(this.curQuestion.options);
         $("#quiz-title").text(this.curQuestion.title);
         $("#quiz-answers").empty();
@@ -42,6 +44,7 @@ let game = {
             let optionButton = $(`<button>${options[i]}</button><br>`).addClass("quizButton btn btn-outline-primary");
             $("#quiz-answers").append(optionButton);
         };
+        this.questionCount++;
     },
 
     displayAnswer: function () {
@@ -83,7 +86,10 @@ $(document).ready(function () {
     $("#quiz-answers").on("click", "button", game.answerCheck);
     $("#message").on("click", "button", function() {
         $("#message").empty();
+        game.right = 0;
         game.questionsAnswered = 0;
+        game.questionCount = 0;
+        game.questions = shuffle(game.questions);
         game.displayQuestion();
     });
 })
